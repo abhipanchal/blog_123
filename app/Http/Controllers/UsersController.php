@@ -3,12 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DataTables\UsersDataTable;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function index(UsersDataTable $dataTable)
+    public function index()
     {
-        return $dataTable->render('users.index');
+        $users = User::all();
+        //  dd($users);
+
+        return view('users.index', ['users' => $users]);
     }
+    public function create()
+    {
+        return view('contacts.create');
+    }
+    public function show($id)
+    {
+        return view('user.profile', ['user' => User::findOrFail($id)]);
+    }
+
+    public function edit($id)
+    {
+        //
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
 }
